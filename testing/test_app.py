@@ -24,7 +24,7 @@ class YouTubeDownloaderAPITest(unittest.TestCase):
     def test_index(self):
         """Test the / (index) route."""
         response = self.client.get('/')
-        self.assertEqual(response.status_code, 200) #Fail build pipeline if a test is wrong, correct is "200"  >:(
+        self.assertEqual(response.status_code, 300) #Fail build pipeline if a test is wrong, correct is "200"  >:(
 
 if __name__ == '__main__':
     unittest.main()
