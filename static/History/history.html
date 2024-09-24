@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download History</title>
+    <link rel="stylesheet" href="/static/HomePage/styles.css"> 
+</head>
+<body>
+    <h1>Download History</h1>
+    <ul id="history-list">
+    </ul>
+
+    <button onclick="window.location.href='/'">Go Back</button>
+
+    <script>
+        fetch('/history')
+            .then(response => response.json())
+            .then(data => {
+                const historyList = document.getElementById('history-list');
+                data.history.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.textContent = `${item.title} - ${item.timestamp}`;
+                    historyList.appendChild(listItem);
+                });
+            });
+    </script>
+</body>
+</html>

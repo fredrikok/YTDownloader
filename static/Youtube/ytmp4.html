@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube to MP4 Downloader</title>
+    <link rel="stylesheet" href="../../static/styles.css"> 
+</head>
+<body>
+
+    <a href="/">⬅️</a>
+
+
+    <h1>YouTube to MP4 Downloader</h1>
+    <p>Enter the YouTube video URL to download the video as MP4.</p>
+
+    <form id="download-form">
+        <input type="text" id="url" placeholder="Enter YouTube URL" required>
+        <button type="submit">Download MP4</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script>
+        document.getElementById('download-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = 'Processing your request...';
+    
+            fetch('/download', {  // For MP3, use '/download_mp3'
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ url: url })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    messageDiv.textContent = `Error: ${data.error}`;
+                } else {
+                    messageDiv.textContent = 'Download starting...';
+                    window.location.href = data.file_url;  // Redirect to file URL
+                }
+            })
+            .catch(error => {
+                messageDiv.textContent = `An error occurred: ${error.message}`;
+            });
+        });
+    </script>
+</body>
+</html>

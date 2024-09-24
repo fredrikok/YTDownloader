@@ -1,0 +1,71 @@
+{
+  "swagger": "2.0",
+  "info": {
+      "title": "YouTube Downloader API",
+      "description": "API to download YouTube videos using yt-dlp.",
+      "version": "1.0.0"
+  },
+  "host": "localhost:5000",
+  "basePath": "/",
+  "schemes": [
+      "http"
+  ],
+  "paths": {
+      "/getapi": {
+          "get": {
+              "summary": "Gets a string returned",
+              "responses": {
+                  "200": {
+                      "description": "A simple string response",
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "message": {
+                                  "type": "string"
+                              }
+                          }
+                      }
+                  }
+              }
+          }
+      },
+      "/download": {
+          "post": {
+              "summary": "Download YouTube video",
+              "description": "Download a video from YouTube using the provided URL.",
+              "consumes": ["application/json"],
+              "produces": ["application/octet-stream"],
+              "parameters": [
+                  {
+                      "name": "url",
+                      "in": "body",
+                      "required": true,
+                      "schema": {
+                          "type": "object",
+                          "properties": {
+                              "url": {
+                                  "type": "string",
+                                  "example": "https://www.youtube.com/watch?v=example"
+                              }
+                          }
+                      }
+                  }
+              ],
+              "responses": {
+                  "200": {
+                      "description": "File downloaded successfully",
+                      "schema": {
+                          "type": "file"
+                      }
+                  },
+                  "400": {
+                      "description": "Invalid request"
+                  },
+                  "500": {
+                      "description": "Server error"
+                  }
+              }
+          }
+      }
+  }
+}
