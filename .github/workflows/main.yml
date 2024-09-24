@@ -15,7 +15,6 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build the Docker image
-        id: build
         run: |
           docker build . --file Dockerfile --tag ytdownloader:$(date +%s)
 
@@ -25,10 +24,8 @@ jobs:
 
       - name: Tag Docker image
         run: |
-          IMAGE_TAG="brightstraining24fall.azurecr.io/fredrik/ytdownloader:${{ github.run_id }}"
-          docker tag ytdownloader:latest $IMAGE_TAG
+          docker tag ytdownloader:latest brightstraining24fall.azurecr.io/fredrik/ytdownloader:$(date +%s)
 
       - name: Push Docker image
         run: |
-          docker push brightstraining24fall.azurecr.io/fredrik/ytdownloader:${{ github.run_id }}
-s
+          docker push brightstraining24fall.azurecr.io/fredrik/ytdownloader:$(date +%s)
