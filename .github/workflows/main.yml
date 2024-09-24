@@ -16,7 +16,8 @@ jobs:
 
       - name: Build the Docker image
         run: |
-          docker build . --file Dockerfile --tag ytdownloader:$(date +%s)
+          TIMESTAMP=$(date +%s)
+          docker build . --file Dockerfile --tag ytdownloader:latest --tag ytdownloader:$TIMESTAMP
 
       - name: Log in to Azure Container Registry
         run: |
@@ -24,8 +25,9 @@ jobs:
 
       - name: Tag Docker image
         run: |
-          docker tag ytdownloader:latest brightstraining24fall.azurecr.io/fredrik/ytdownloader
+          docker tag ytdownloader:latest brightstraining24fall.azurecr.io/fredrik/ytdownloader:latest
 
       - name: Push Docker image
         run: |
-          docker push brightstraining24fall.azurecr.io/fredrik/ytdownloader:$(date +%s)
+          docker push brightstraining24fall.azurecr.io/fredrik/ytdownloader:latest
+          docker push brightstraining24fall.azurecr.io/fredrik/ytdownloader:$TIMESTAMP
