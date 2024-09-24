@@ -26,9 +26,7 @@ jobs:
       - name: Tag Docker image
         run: |
           docker tag ytdownloader:latest brightstraining24fall.azurecr.io/fredrik/ytdownloader:latest
-          docker tag ytdownloader:$TIMESTAMP brightstraining24fall.azurecr.io/fredrik/ytdownloader:$TIMESTAMP
 
       - name: Push Docker image
         run: |
           docker push brightstraining24fall.azurecr.io/fredrik/ytdownloader:latest
-          docker push brightstraining24fall.azurecr.io/fredrik/ytdownloader:$TIMESTAMP
