@@ -19,7 +19,7 @@ class YouTubeDownloaderAPITest(unittest.TestCase):
         response = self.client.get('/getapi')
         self.assertEqual(response.status_code, 200)
         data = json.loads(response.data)
-        self.assertEqual(data['message'], "Hello world!.")
+        self.assertEqual(data['message'], "This is a simple string response.")
 
     def test_index(self):
         """Test the / (index) route."""
